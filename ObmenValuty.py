@@ -5,10 +5,16 @@ import requests
 from tkinter import ttk
 
 
-def update_curs_label(event):
+def update_b_label(event):
+    code = b_combobox.get()
+    name = curs[code]
+    b_label.config(text=name)
+
+def update_t_label(event):
     code = t_combobox.get()
     name = curs[code]
-    curs_label.config(text=name)
+    t_label.config(text=name)
+
 
 def exchange():
     t_code = t_combobox.get()
@@ -53,16 +59,20 @@ Label(text="Базовая валюта").pack(padx=10, pady=10)
 
 b_combobox = ttk.Combobox(values=list(curs.keys()))
 b_combobox.pack(padx=10, pady=10)
+b_combobox.bind("<<ComboboxSelected>>", update_b_label)
+
+b_label = ttk.Label()
+b_label.pack(padx=10, pady=10)
 
 
 Label(text="Целевая валюта").pack(padx=10, pady=10)
 
 t_combobox = ttk.Combobox(values=list(curs.keys()))
 t_combobox.pack(padx=10, pady=10)
-t_combobox.bind("<<ComboboxSelected>>", update_curs_label)
+t_combobox.bind("<<ComboboxSelected>>", update_t_label)
 
-curs_label = ttk.Label()
-curs_label.pack(padx=10, pady=10)
+t_label = ttk.Label()
+t_label.pack(padx=10, pady=10)
 
 Button(text="Получить курс обмена валют", command=exchange).pack(padx=10, pady=10)
 
