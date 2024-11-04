@@ -10,6 +10,13 @@ def update_b_label(event):
     name = curs[code]
     b_label.config(text=name)
 
+
+def update_b2_label(event):
+    code = b2_combobox.get()
+    name = curs[code]
+    b2_label.config(text=name)
+
+
 def update_t_label(event):
     code = t_combobox.get()
     name = curs[code]
@@ -73,6 +80,10 @@ Label(text="Вторая базовая валюта").pack(padx=10, pady=10)
 
 b2_combobox = ttk.Combobox(values=list(curs.keys()))
 b2_combobox.pack(padx=10, pady=10)
+b2_combobox.bind("<<ComboboxSelected>>", update_b2_label)
+
+b2_label = ttk.Label()
+b2_label.pack(padx=10, pady=10)
 
 
 
